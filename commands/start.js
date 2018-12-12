@@ -1,5 +1,5 @@
 const readline = require(`readline`);
-const store = require(`../store`);
+const store = require(`../stores/strings-store`);
 
 module.exports = {
   name: `start`,
@@ -22,14 +22,62 @@ module.exports = {
 
     let counter = 0;
 
+    const setAnswerTime = (string, time) => {
+      string.newTime = new Date().getTime() - time;
+    };
+
+    const getResult = (strings) => {
+      let previousResultTime = 0;
+      let challengeResultTime = 0;
+      const betterTimeStrings = [];
+
+      strings.forEach((string) => {
+        if (string.time) {
+          previousResultTime = previousResultTime + string.time;
+          challengeResultTime = challengeResultTime + string.newTime;
+
+          if (string.newTime < string.time) {
+            betterTimeStrings.push(string);
+          }
+        } else {
+          betterTimeStrings.push(string);
+        }
+      });
+
+      if (betterTimeStrings.length) {
+        store.updateTime(betterTimeStrings);
+      }
+
+      return (previousResultTime === 0)
+        ? 0
+        : (previousResultTime - challengeResultTime) / previousResultTime * 100;
+    };
+
+    const getResultMessage = (result) => {
+      if (result === 0) {
+        return `Новые слова. Сравнение будет в следующих задачах.`
+      } else {
+        const roundedResult = Math.round(result * 10) / 10;
+
+        return (roundedResult > 0)
+          ? `Новый рекорд! +${roundedResult}%`
+          : `Прогресс отсутствует.. ${roundedResult}%`;
+      }
+    };
+
     const askQuestion = (text) => {
       const question = `${text}\n`;
+      const startTime = new Date().getTime();
 
       rl.question(question, (answer) => {
         if (answer === text) {
-          console.log(true);
+          setAnswerTime(challengeStrings[counter], startTime);
 
           if (counter === q - 1) {
+            const result = getResult(challengeStrings);
+            const resultMessage = getResultMessage(result);
+
+            console.log(resultMessage);
             rl.close();
           } else {
             counter = counter + 1;

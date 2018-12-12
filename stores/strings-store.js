@@ -1,7 +1,8 @@
 const fs = require(`fs`);
-const file = `strings.json`;
 
-class Store {
+const file = `stores/strings.json`;
+
+class StringsStore {
   constructor(fileName) {
     this.filename = fileName;
   }
@@ -27,6 +28,24 @@ class Store {
     return ++this._maxId;
   }
 
+  updateTime(modifiedStrings) {
+    const strings = this.fetchStrings();
+
+    modifiedStrings.forEach((modifiedStr) => {
+      strings.find((string) => {
+        if (string.id === modifiedStr.id) {
+          if(!string.time || modifiedStr.newTime < string.time) {
+            string.time = modifiedStr.newTime;
+          }
+
+          return true;
+        }
+      });
+    });
+
+    this.saveStrings(strings);
+  };
+
   saveStrings (strings) {
     fs.writeFileSync(this.filename, JSON.stringify(strings));
   }
@@ -49,6 +68,7 @@ class Store {
       const strings = fs.readFileSync(this.filename);
       return JSON.parse(strings);
     } catch (e) {
+      console.log(e);
       return [];
     }
   }
@@ -77,5 +97,5 @@ class Store {
   }
 }
 
-module.exports = new Store(file);
+module.exports = new StringsStore(file);
 

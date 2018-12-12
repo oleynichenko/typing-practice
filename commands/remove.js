@@ -1,4 +1,4 @@
-const store = require(`../store`);
+const store = require(`../stores/strings-store`);
 
 module.exports = {
   name: `remove`,

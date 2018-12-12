@@ -1,4 +1,4 @@
-const store = require(`../store`);
+const store = require(`../stores/strings-store`);
 
 module.exports = {
   name: `add`,
@@ -7,7 +7,7 @@ module.exports = {
     string: {
       describe: 'Text of string',
       demand: true,
-      alias: 'a'
+      alias: 's'
     }
   },
   execute(string) {

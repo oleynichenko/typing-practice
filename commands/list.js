@@ -1,4 +1,4 @@
-const store = require(`../store`);
+const store = require(`../stores/strings-store`);
 
 module.exports = {
   name: `list`,
@@ -8,7 +8,7 @@ module.exports = {
 
     if (strings.length) {
       strings.forEach((item) => {
-        const bestTime = (item.time) ? `, ${item.time}` : ``;
+        const bestTime = (item.time) ? `, time: ${item.time}` : ``;
 
         console.log(`Id: ${item.id}, "${item.text}"${bestTime};`);
       });
