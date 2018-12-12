@@ -1,0 +1,17 @@
+{
+  "name": "typing-practice",
+  "version": "1.0.0",
+  "description": "Console tool for practicing typing",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "typing"
+  ],
+  "author": "Oleynichenko Alexandr",
+  "license": "ISC",
+  "dependencies": {
+    "yargs": "12.0.5"
+  }
+}
