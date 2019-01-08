@@ -5,9 +5,9 @@ module.exports = {
   description: `Add a new string`,
   options: {
     string: {
-      describe: 'Text of string',
+      describe: `Text of string`,
       demand: true,
-      alias: 's'
+      alias: `s`
     }
   },
   execute(string) {
@@ -26,7 +26,7 @@ module.exports = {
 
       store.saveStrings(strings);
 
-      console.log(`String "${formattedString}" successfully saved.` )
+      console.log(`String "${formattedString}" successfully saved.`);
     }
   }
 };

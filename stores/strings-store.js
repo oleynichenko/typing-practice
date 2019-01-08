@@ -34,7 +34,7 @@ class StringsStore {
     modifiedStrings.forEach((modifiedStr) => {
       strings.find((string) => {
         if (string.id === modifiedStr.id) {
-          if(!string.time || modifiedStr.newTime < string.time) {
+          if (!string.time || modifiedStr.newTime < string.time) {
             string.time = modifiedStr.newTime;
           }
 
@@ -44,9 +44,9 @@ class StringsStore {
     });
 
     this.saveStrings(strings);
-  };
+  }
 
-  saveStrings (strings) {
+  saveStrings(strings) {
     fs.writeFileSync(this.filename, JSON.stringify(strings));
   }
 
@@ -88,10 +88,10 @@ class StringsStore {
 
     return strings.find((string, index) => {
       if (string.id === id) {
-         strings.splice(index, 1);
-         this.saveStrings(strings);
+        strings.splice(index, 1);
+        this.saveStrings(strings);
 
-         return true;
+        return true;
       }
     });
   }

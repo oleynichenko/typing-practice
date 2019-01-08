@@ -6,7 +6,7 @@ module.exports = {
   description: `Start challenge`,
   options: {
     quantity: {
-      alias: 'q',
+      alias: `q`,
       describe: `Quantity of strings in challenge`,
       default: 5
     }
@@ -55,7 +55,7 @@ module.exports = {
 
     const getResultMessage = (result) => {
       if (result === 0) {
-        return `Новые слова. Сравнение будет в следующих задачах.`
+        return `Новые слова. Сравнение будет в следующих задачах.`;
       } else {
         const roundedResult = Math.round(result * 10) / 10;
 

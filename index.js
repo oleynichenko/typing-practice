@@ -1,6 +1,6 @@
-const yargs = require('yargs');
+const yargs = require(`yargs`);
 
-const startWithCountDown = require('./util/countdown');
+const startWithCountDown = require(`./util/countdown`);
 const addCommand = require(`./commands/add`);
 const listCommand = require(`./commands/list`);
 const removeCommand = require(`./commands/remove`);
@@ -12,12 +12,12 @@ const argv = yargs
   .command(removeCommand.name, removeCommand.description, removeCommand.options)
   .command(startCommand.name, startCommand.description, startCommand.options)
   .help()
-  .alias('help', 'h')
+  .alias(`help`, `h`)
   .argv;
 
 const command = argv._[0];
 
-switch(command) {
+switch (command) {
   case addCommand.name:
     addCommand.execute(argv.string);
     break;
